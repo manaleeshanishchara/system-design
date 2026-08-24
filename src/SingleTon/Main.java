@@ -34,3 +34,57 @@ class LazySingleTon {
         return instance;
     }
 }
+
+class MethodSingleTon {
+    private static MethodSingleTon instance;
+
+    private MethodSingleTon() {
+    }
+
+    public static synchronized MethodSingleTon getInstance() {
+        if (instance == null) {
+            instance = new MethodSingleTon();
+        }
+        return instance;
+    }
+}
+
+class DoubleCheckLockingSingleTon {
+    private static volatile DoubleCheckLockingSingleTon instance;
+
+    private DoubleCheckLockingSingleTon() {
+    }
+
+    public static DoubleCheckLockingSingleTon getInstance() {
+        if (instance == null) {
+            synchronized (DoubleCheckLockingSingleTon.class) {
+                if (instance == null) {
+                    instance = new DoubleCheckLockingSingleTon();
+                }
+            }
+        }
+        return instance;
+    }
+}
+
+class BillPughSingleTon {
+    private BillPughSingleTon() {
+    }
+
+    private static class Holder {
+        private static final BillPughSingleTon instance = new BillPughSingleTon();
+    }
+
+    public static BillPughSingleTon getInstance() {
+        return Holder.instance;
+    }
+}
+
+enum EnumSingleTon {
+    INSTANCE;
+
+    public void doSomething() {
+        System.out.println("Doing something in EnumSingleTon");
+    }
+
+}// this need to check ENUM I need to understand.

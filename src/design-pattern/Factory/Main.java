@@ -1,3 +1,5 @@
+package designpattern.Factory;
+
 interface Document {
     String getHeader();
 

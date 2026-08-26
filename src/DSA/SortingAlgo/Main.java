@@ -20,21 +20,28 @@ public class Main {
     }
 }
 
+// swapping element s until bigger reach to largest postion
 class BubbleSort {
     public static void sort(int[] arr) {
         int n = arr.length;
         for (int i = 0; i < n - 1; i++) {
+            boolean swapped = false;
             for (int j = 0; j < n - 1 - i; j++) {
                 if (arr[j] > arr[j + 1]) {
                     int temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
+                    swapped = true;
                 }
+            }
+            if (!swapped) {
+                break;
             }
         }
     }
 }
 
+// hole algorithm
 class InsertionSort {
     public static void sort(int[] arr) {
         for (int i = 1; i < arr.length; i++) {
@@ -49,6 +56,7 @@ class InsertionSort {
     }
 }
 
+// select minmum and put it to ith index
 class SelectionSort {
     public static void sort(int[] arr) {
         int n = arr.length;

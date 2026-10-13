@@ -1,5 +1,7 @@
 package DSA.DoublyLinkedList;
 
+import java.util.NoSuchElementException;
+
 public class DoublyLinkedList {
 
     private static class Node {
@@ -65,6 +67,68 @@ public class DoublyLinkedList {
         curr.prev = node;
         size++;
 
+    }
+
+    public int remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new NoSuchElementException();
+        }
+
+        Node curr = getNode(index);
+        int val = curr.val;
+
+        if (curr.prev != null) {
+            curr.prev.next = curr.next;
+        } else {
+            head = curr.next;
+        }
+
+        if (curr.next != null) {
+            curr.next.prev = curr.prev;
+        } else {
+            tail = curr.prev;
+        }
+
+        size--;
+        return val;
+    }
+
+    public int removeFirst() {
+        if (head == null) {
+            throw new NoSuchElementException();
+        }
+        int val = head.val;
+        head = head.next;
+        if (head != null) {
+            head.prev = null;
+        } else {
+            tail = null; // List is now empty
+        }
+        size--;
+        return val;
+    }
+
+    public int removeLast() {
+        if (tail == null) {
+            throw new NoSuchElementException();
+        }
+        int val = tail.val;
+        tail = tail.prev;
+        if (tail != null) {
+            tail.next = null;
+        } else {
+            head = null; // List is now empty
+        }
+        size--;
+        return val;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     public void printForward() {
